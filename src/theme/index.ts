@@ -4,8 +4,8 @@ export default {
     RED_DARK: "#BF3B44",
     RED_LIGHT: "#F4E6E7",
 
-    GREEN_MID: "#639339",
-    GREEN_DARK: "#CBE4B4",
+    GREEN_DARK: "#639339",
+    GREEN_MID: "#CBE4B4",
     GREEN_LIGHT: "#E5F0DB",
 
     WHITE: "#FFFFFF",
@@ -18,8 +18,8 @@ export default {
     GRAY_1: "#1B1D1E",
   },
   FONT_FAMILY: {
-    REGULAR: "Roboto_400Regular",
-    BOLD: "Roboto_700Bold",
+    REGULAR: "NunitoSans_400Regular",
+    BOLD: "NunitoSans_700Bold",
   },
   FONT_SIZE: {
     XS: 12,

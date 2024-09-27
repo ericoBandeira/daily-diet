@@ -1,11 +1,14 @@
 import React from "react";
 
-import { Container, TextContainer } from "./styles";
+import { Container } from "./styles";
+import { Header } from "@components/Header";
+import { PercentBox } from "@components/PercentBox";
 
 export function Home() {
   return (
     <Container>
-      <TextContainer>Home</TextContainer>
+      <Header />
+      <PercentBox />
     </Container>
   );
 }
