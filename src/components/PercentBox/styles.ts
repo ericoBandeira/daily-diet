@@ -1,8 +1,13 @@
 import styled, { css } from "styled-components/native";
 
-export const Container = styled.View`
+interface ContainerProps {
+  color: "red" | "green";
+}
+
+export const Container = styled.View<ContainerProps>`
   width: 100%;
-  background-color: ${({ theme }) => theme.COLORS.GREEN_LIGHT};
+  background-color: ${({ theme, color }) =>
+    color === "green" ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
 
   justify-content: space-between;
   margin-top: 33px;
@@ -13,11 +18,25 @@ export const Container = styled.View`
   border-radius: 8px;
 `;
 
+export const IconContainer = styled.View`
+  width: 100%;
+  flex-direction: row-reverse;
+`;
+
 export const PercentNumber = styled.Text`
+  margin-top: -15px;
   ${({ theme }) => css`
+    color: ${theme.COLORS.GRAY_1};
     font-size: ${theme.FONT_SIZE.XXL};
-    font-weight: ${theme.FONT_FAMILY.BOLD};
+    font-family: ${theme.FONT_FAMILY.BOLD};
   `}
 `;
 
-export const PercentText = styled.Text``;
+export const PercentText = styled.Text`
+  margin-bottom: 12px;
+  ${({ theme }) => css`
+    color: ${theme.COLORS.GRAY_2};
+    font-size: ${theme.FONT_SIZE.SM};
+    font-family: ${theme.FONT_FAMILY.REGULAR};
+  `}
+`;
