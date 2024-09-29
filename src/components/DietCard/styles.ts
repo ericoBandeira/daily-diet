@@ -18,6 +18,7 @@ export const Container = styled.View<ContainerColorProps>`
 `;
 
 export const TextLabel = styled.Text`
+  text-align: center;
   ${({ theme }) => css`
     color: ${theme.COLORS.GRAY_2};
     font-size: ${theme.FONT_SIZE.SM};

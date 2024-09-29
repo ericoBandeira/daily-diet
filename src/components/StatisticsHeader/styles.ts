@@ -7,7 +7,7 @@ interface ContainerProps {
 export const Container = styled.View<ContainerProps>`
   width: 100%;
   background-color: ${({ theme, color }) =>
-    color === "green" ? theme.COLORS.GREEN_MID : theme.COLORS.RED_MID};
+    color === "green" ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
 
   padding: 80px 24px 24px 24px;
 `;

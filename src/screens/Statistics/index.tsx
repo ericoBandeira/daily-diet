@@ -12,7 +12,7 @@ import { DietCard } from "@components/DietCard";
 export function Statistics() {
   return (
     <Container>
-      <StatisticsHeader color="green" />
+      <StatisticsHeader color="red" />
       <StatisticsContainer>
         <StatisticsTitle>Estatísticas gerais</StatisticsTitle>
         <NormalCard
@@ -28,7 +28,7 @@ export function Statistics() {
           />
           <DietCard
             numberLabel="10"
-            textLabel="refeições fora da dienta"
+            textLabel="refeições fora da dieta"
             color="red"
           />
         </DietCardContainer>

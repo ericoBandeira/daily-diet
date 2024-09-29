@@ -1,4 +1,6 @@
 import { Home } from "@screens/Home";
+import { Statistics } from "@screens/Statistics";
+import { NewMeal } from "@screens/NewMeal";
 import { Loading } from "@components/Loading";
 
 import theme from "@theme/index";
@@ -11,7 +13,6 @@ import {
   NunitoSans_700Bold,
   useFonts,
 } from "@expo-google-fonts/nunito-sans";
-import { Statistics } from "@screens/Statistics";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold });
@@ -24,7 +25,7 @@ export default function App() {
           backgroundColor="transparent"
           translucent
         />
-        {fontsLoaded ? <Statistics /> : <Loading />}
+        {fontsLoaded ? <NewMeal /> : <Loading />}
       </>
     </ThemeProvider>
   );
