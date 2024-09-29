@@ -30,6 +30,6 @@ export const InputText = styled(TextInput).attrs({
   ${({ theme }) => css`
     color: ${theme.COLORS.GRAY_1};
     font-family: ${theme.FONT_FAMILY.REGULAR};
-    font-size: ${theme.FONT_SIZE.MD}px;
+    font-size: ${theme.FONT_SIZE.MD};
   `};
 `;

@@ -7,7 +7,6 @@ export const Container = styled.View`
 
 export const StatisticsContainer = styled.View`
   width: 100%;
-  height: 100%;
   margin-top: -22px;
   border-radius: 20px 20px 0 0;
   align-items: center;
