@@ -1,6 +1,8 @@
 import { Home } from "@screens/Home";
 import { Statistics } from "@screens/Statistics";
 import { NewMeal } from "@screens/NewMeal";
+import { CreateNewMeal } from "@screens/CreateNewMeal";
+import { CreateNewMealNotInDiet } from "@screens/CreateNewMealNotInDiet";
 import { Loading } from "@components/Loading";
 
 import theme from "@theme/index";
@@ -25,7 +27,7 @@ export default function App() {
           backgroundColor="transparent"
           translucent
         />
-        {fontsLoaded ? <NewMeal /> : <Loading />}
+        {fontsLoaded ? <CreateNewMealNotInDiet /> : <Loading />}
       </>
     </ThemeProvider>
   );
