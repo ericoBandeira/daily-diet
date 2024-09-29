@@ -26,7 +26,7 @@ export function DietDay({ day, diet }: DietDayProps) {
       <DayTitle>{day}</DayTitle>
       {diet.map((diet: DietProps) => {
         return (
-          <MealBox>
+          <MealBox key={diet.time}>
             <FoodInfoContainer>
               <MealTime>{diet.time}</MealTime>
               <Separator>|</Separator>
