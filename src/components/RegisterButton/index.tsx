@@ -1,9 +1,13 @@
 import { Container, RegisterButtonContainer, TextButton } from "./styles";
 
-export function RegisterButton() {
+interface RegisterButtonProps {
+  registerMeal: () => void;
+}
+
+export function RegisterButton({ registerMeal }: RegisterButtonProps) {
   return (
     <Container>
-      <RegisterButtonContainer>
+      <RegisterButtonContainer onPress={registerMeal}>
         <TextButton>Cadastrar refeição</TextButton>
       </RegisterButtonContainer>
     </Container>

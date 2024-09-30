@@ -1,8 +1,15 @@
 import { ArrowUpRight } from "phosphor-react-native";
-import { Container, IconContainer, PercentNumber, PercentText } from "./styles";
+import {
+  Container,
+  IconButton,
+  IconContainer,
+  PercentNumber,
+  PercentText,
+} from "./styles";
 
 interface PercentBoxProps {
   color: "red" | "green";
+  goToStatistics: () => void;
 }
 
 const colorMap = {
@@ -10,11 +17,13 @@ const colorMap = {
   red: "#BF3B44",
 };
 
-export function PercentBox({ color }: PercentBoxProps) {
+export function PercentBox({ color, goToStatistics }: PercentBoxProps) {
   return (
     <Container color={color}>
       <IconContainer>
-        <ArrowUpRight size={24} color={colorMap[color]} />
+        <IconButton onPress={goToStatistics}>
+          <ArrowUpRight size={24} color={colorMap[color]} />
+        </IconButton>
       </IconContainer>
       <PercentNumber>90,86%</PercentNumber>
       <PercentText>das refeições dentro da dieta</PercentText>

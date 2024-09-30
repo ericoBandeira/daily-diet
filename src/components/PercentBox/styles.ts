@@ -40,3 +40,5 @@ export const PercentText = styled.Text`
     font-family: ${theme.FONT_FAMILY.REGULAR};
   `}
 `;
+
+export const IconButton = styled.TouchableOpacity``;

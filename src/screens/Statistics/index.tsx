@@ -8,11 +8,18 @@ import {
 } from "./styles";
 import { NormalCard } from "@components/NormalCard";
 import { DietCard } from "@components/DietCard";
+import { useNavigation } from "@react-navigation/native";
 
 export function Statistics() {
+  const navigation = useNavigation();
+
+  function handleGoBackHome() {
+    navigation.navigate("home");
+  }
+
   return (
     <Container>
-      <StatisticsHeader color="red" />
+      <StatisticsHeader color="red" goBack={handleGoBackHome} />
       <StatisticsContainer>
         <StatisticsTitle>Estatísticas gerais</StatisticsTitle>
         <NormalCard

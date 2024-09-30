@@ -6,15 +6,16 @@ import {
   NewMealTitle,
 } from "./styles";
 
-interface ColorProps {
+interface HeaderProps {
   color: "red" | "green" | "gray";
   title: string;
+  goBack?: () => void;
 }
 
-export function MealHeader({ color, title }: ColorProps) {
+export function MealHeader({ color, title, goBack }: HeaderProps) {
   return (
     <Container color={color}>
-      <BackButton>
+      <BackButton onPress={goBack}>
         <ArrowLeft size={24} color="#1B1D1E" />
       </BackButton>
       <NewMealContainer>

@@ -6,6 +6,7 @@ import { PercentBox } from "@components/PercentBox";
 import { AddMealButton } from "@components/AddMealButton";
 import { FlatList } from "react-native";
 import { DietDay } from "@components/DietDay";
+import { useNavigation } from "@react-navigation/native";
 
 interface DietProps {
   time: string;
@@ -49,12 +50,23 @@ export function Home() {
     },
   ]);
 
+  const navigation = useNavigation();
+
+  function handleStatistics() {
+    navigation.navigate("statistics");
+  }
+
+  function handleCreateNewMeal() {
+    navigation.navigate("newMeal");
+  }
+
   return (
     <Container>
       <Header />
-      <PercentBox color="green" />
-      <AddMealButton />
+      <PercentBox color="green" goToStatistics={handleStatistics} />
+      <AddMealButton goTo={handleCreateNewMeal} />
       <FlatList
+        style={{ marginTop: 10 }}
         data={dietDay}
         keyExtractor={(item) => item.day}
         renderItem={({ item }) => <DietDay day={item.day} diet={item.diet} />}

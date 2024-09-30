@@ -9,6 +9,7 @@ import {
 
 interface StatisticsHeaderProps {
   color: "red" | "green";
+  goBack: () => void;
 }
 
 const colorMap = {
@@ -16,10 +17,10 @@ const colorMap = {
   red: "#BF3B44",
 };
 
-export function StatisticsHeader({ color }: StatisticsHeaderProps) {
+export function StatisticsHeader({ color, goBack }: StatisticsHeaderProps) {
   return (
     <Container color={color}>
-      <BackButton>
+      <BackButton onPress={goBack}>
         <ArrowLeft size={24} color={color} />
       </BackButton>
       <InfoContainer>

@@ -10,8 +10,15 @@ import {
 
 import inDietImg from "@assets/inDietImg.png";
 import { Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export function CreateNewMeal() {
+  const navigation = useNavigation();
+
+  function handleGoBackHome() {
+    navigation.navigate("home");
+  }
+
   return (
     <Container>
       <Title>Continue Assim!</Title>
@@ -19,7 +26,7 @@ export function CreateNewMeal() {
         Você continua <SubTitleBold>dentro da dieta</SubTitleBold>. Muito bem!
       </SubTitle>
       <Image source={inDietImg} />
-      <GoHomeButton>
+      <GoHomeButton onPress={handleGoBackHome}>
         <GoHomeButtonText>Ir para a página inicial</GoHomeButtonText>
       </GoHomeButton>
     </Container>

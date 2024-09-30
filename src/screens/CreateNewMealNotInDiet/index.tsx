@@ -10,8 +10,15 @@ import {
   SubTitleBold,
   Title,
 } from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
 export function CreateNewMealNotInDiet() {
+  const navigation = useNavigation();
+
+  function handleGoBackHome() {
+    navigation.navigate("home");
+  }
+
   return (
     <Container>
       <Title>Que pena!</Title>
@@ -20,7 +27,7 @@ export function CreateNewMealNotInDiet() {
         se esforçando e não desista!
       </SubTitle>
       <Image source={NotInDietImg} />
-      <GoHomeButton>
+      <GoHomeButton onPress={handleGoBackHome}>
         <GoHomeButtonText>Ir para a página inicial</GoHomeButtonText>
       </GoHomeButton>
     </Container>
