@@ -15,7 +15,7 @@ export const DayTitle = styled.Text`
   margin-bottom: 5px;
 `;
 
-export const MealBox = styled.View`
+export const MealBox = styled.TouchableOpacity`
   width: 100%;
   padding: 16px 15px;
   margin-top: 7px;

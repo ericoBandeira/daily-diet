@@ -11,9 +11,10 @@ import {
 import inDietImg from "@assets/inDietImg.png";
 import { Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { NavigationProp } from "src/routes/app.routes";
 
 export function CreateNewMeal() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
 
   function handleGoBackHome() {
     navigation.navigate("home");

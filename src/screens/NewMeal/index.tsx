@@ -6,10 +6,11 @@ import { Input } from "@components/Input";
 import { InOrOutInput } from "@components/InOrOutInput";
 import { RegisterButton } from "@components/RegisterButton";
 import { useNavigation } from "@react-navigation/native";
+import { NavigationProp } from "src/routes/app.routes";
 
 export function NewMeal() {
   const [inDiet, setInDiet] = useState(true);
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
 
   function handleGoBackHome() {
     navigation.navigate("home");

@@ -11,9 +11,10 @@ import {
   Title,
 } from "./styles";
 import { useNavigation } from "@react-navigation/native";
+import { NavigationProp } from "src/routes/app.routes";
 
 export function CreateNewMealNotInDiet() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
 
   function handleGoBackHome() {
     navigation.navigate("home");

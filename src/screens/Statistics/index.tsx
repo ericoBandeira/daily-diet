@@ -9,9 +9,10 @@ import {
 import { NormalCard } from "@components/NormalCard";
 import { DietCard } from "@components/DietCard";
 import { useNavigation } from "@react-navigation/native";
+import { NavigationProp } from "src/routes/app.routes";
 
 export function Statistics() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
 
   function handleGoBackHome() {
     navigation.navigate("home");

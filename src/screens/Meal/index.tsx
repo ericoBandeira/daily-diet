@@ -18,11 +18,19 @@ import {
 } from "./styles";
 import { MealHeader } from "@components/MealHeader";
 import { PencilSimpleLine, Trash } from "phosphor-react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NavigationProp } from "src/routes/app.routes";
 
 export function Meal() {
+  const navigation = useNavigation<NavigationProp>();
+
+  function handleGoBackHome() {
+    navigation.navigate("home");
+  }
+
   return (
     <Container>
-      <MealHeader color="green" title="Refeição" />
+      <MealHeader color="green" title="Refeição" goBack={handleGoBackHome} />
       <NewMealContainer>
         <MealName>Sanduíche</MealName>
         <MealDescription>

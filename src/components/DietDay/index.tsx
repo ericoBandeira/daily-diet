@@ -18,15 +18,16 @@ interface DietProps {
 interface DietDayProps {
   day: string;
   diet: DietProps[];
+  goToMeal: () => void;
 }
 
-export function DietDay({ day, diet }: DietDayProps) {
+export function DietDay({ day, diet, goToMeal }: DietDayProps) {
   return (
     <Container>
       <DayTitle>{day}</DayTitle>
       {diet.map((diet: DietProps) => {
         return (
-          <MealBox key={diet.time}>
+          <MealBox key={diet.time} onPress={goToMeal}>
             <FoodInfoContainer>
               <MealTime>{diet.time}</MealTime>
               <Separator>|</Separator>

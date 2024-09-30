@@ -7,6 +7,7 @@ import { AddMealButton } from "@components/AddMealButton";
 import { FlatList } from "react-native";
 import { DietDay } from "@components/DietDay";
 import { useNavigation } from "@react-navigation/native";
+import { NavigationProp } from "src/routes/app.routes";
 
 interface DietProps {
   time: string;
@@ -50,7 +51,7 @@ export function Home() {
     },
   ]);
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp>();
 
   function handleStatistics() {
     navigation.navigate("statistics");
@@ -58,6 +59,10 @@ export function Home() {
 
   function handleCreateNewMeal() {
     navigation.navigate("newMeal");
+  }
+
+  function handleGoToMeal() {
+    navigation.navigate("meal");
   }
 
   return (
@@ -69,7 +74,9 @@ export function Home() {
         style={{ marginTop: 10 }}
         data={dietDay}
         keyExtractor={(item) => item.day}
-        renderItem={({ item }) => <DietDay day={item.day} diet={item.diet} />}
+        renderItem={({ item }) => (
+          <DietDay day={item.day} diet={item.diet} goToMeal={handleGoToMeal} />
+        )}
       />
     </Container>
   );
