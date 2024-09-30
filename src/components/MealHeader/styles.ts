@@ -1,8 +1,18 @@
+import theme from "@theme/index";
 import styled, { css } from "styled-components/native";
 
-export const Container = styled.View`
+interface ColorMapProps {
+  color: "red" | "green" | "gray";
+}
+
+export const Container = styled.View<ColorMapProps>`
   width: 100%;
-  background-color: ${({ theme }) => theme.COLORS.GRAY_5};
+  background-color: ${({ theme, color }) =>
+    color === "gray"
+      ? theme.COLORS.GRAY_5
+      : color === "red"
+      ? theme.COLORS.RED_LIGHT
+      : theme.COLORS.GREEN_LIGHT};
 
   padding: 80px 24px 46px 24px;
   flex-direction: row;

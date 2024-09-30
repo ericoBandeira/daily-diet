@@ -6,14 +6,19 @@ import {
   NewMealTitle,
 } from "./styles";
 
-export function NewMealHeader() {
+interface ColorProps {
+  color: "red" | "green" | "gray";
+  title: string;
+}
+
+export function MealHeader({ color, title }: ColorProps) {
   return (
-    <Container>
+    <Container color={color}>
       <BackButton>
         <ArrowLeft size={24} color="#1B1D1E" />
       </BackButton>
       <NewMealContainer>
-        <NewMealTitle>Nova refeição</NewMealTitle>
+        <NewMealTitle>{title}</NewMealTitle>
       </NewMealContainer>
     </Container>
   );
