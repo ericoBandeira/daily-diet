@@ -10,6 +10,7 @@ import {
 interface PercentBoxProps {
   color: "red" | "green";
   goToStatistics: () => void;
+  percentage: string;
 }
 
 const colorMap = {
@@ -17,7 +18,11 @@ const colorMap = {
   red: "#BF3B44",
 };
 
-export function PercentBox({ color, goToStatistics }: PercentBoxProps) {
+export function PercentBox({
+  color,
+  goToStatistics,
+  percentage,
+}: PercentBoxProps) {
   return (
     <Container color={color}>
       <IconContainer>
@@ -25,7 +30,7 @@ export function PercentBox({ color, goToStatistics }: PercentBoxProps) {
           <ArrowUpRight size={24} color={colorMap[color]} />
         </IconButton>
       </IconContainer>
-      <PercentNumber>90,86%</PercentNumber>
+      <PercentNumber>{percentage}</PercentNumber>
       <PercentText>das refeições dentro da dieta</PercentText>
     </Container>
   );

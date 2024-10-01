@@ -18,11 +18,26 @@ import {
 } from "./styles";
 import { MealHeader } from "@components/MealHeader";
 import { PencilSimpleLine, Trash } from "phosphor-react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { NavigationProp } from "src/routes/app.routes";
+
+interface DietProps {
+  time: string;
+  name: string;
+  inDiet: boolean;
+  description: string;
+  date: string;
+}
+
+type RouteParams = {
+  diet: DietProps;
+};
 
 export function Meal() {
   const navigation = useNavigation<NavigationProp>();
+  const route = useRoute();
+
+  const { diet } = route.params as RouteParams;
 
   function handleGoBackHome() {
     navigation.navigate("home");
@@ -30,17 +45,23 @@ export function Meal() {
 
   return (
     <Container>
-      <MealHeader color="green" title="Refeição" goBack={handleGoBackHome} />
+      <MealHeader
+        color={diet.inDiet ? "green" : "red"}
+        title="Refeição"
+        goBack={handleGoBackHome}
+      />
       <NewMealContainer>
-        <MealName>Sanduíche</MealName>
-        <MealDescription>
-          Sanduíche de pão integral com atum e salada de alface e tomate
-        </MealDescription>
+        <MealName>{diet.name}</MealName>
+        <MealDescription>{diet.description}</MealDescription>
         <MealTimeTitle>Data e hora</MealTimeTitle>
-        <MealTime>12/08/2022 às 16:00</MealTime>
+        <MealTime>
+          {diet.date} às {diet.time}
+        </MealTime>
         <InDietContainer>
-          <InDietBall color="green" />
-          <InDietText>Dentro da dieta</InDietText>
+          <InDietBall color={diet.inDiet ? "green" : "red"} />
+          <InDietText>
+            {diet.inDiet ? "Dentro da dieta" : "Fora da dieta"}
+          </InDietText>
         </InDietContainer>
 
         <ButtonContainer>

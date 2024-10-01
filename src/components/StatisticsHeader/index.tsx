@@ -10,6 +10,7 @@ import {
 interface StatisticsHeaderProps {
   color: "red" | "green";
   goBack: () => void;
+  percentage: string;
 }
 
 const colorMap = {
@@ -17,14 +18,18 @@ const colorMap = {
   red: "#BF3B44",
 };
 
-export function StatisticsHeader({ color, goBack }: StatisticsHeaderProps) {
+export function StatisticsHeader({
+  color,
+  goBack,
+  percentage,
+}: StatisticsHeaderProps) {
   return (
     <Container color={color}>
       <BackButton onPress={goBack}>
         <ArrowLeft size={24} color={color} />
       </BackButton>
       <InfoContainer>
-        <PercentNumber>90,86%</PercentNumber>
+        <PercentNumber>{percentage}</PercentNumber>
         <PercentText>das refeições dentro da dieta</PercentText>
       </InfoContainer>
     </Container>

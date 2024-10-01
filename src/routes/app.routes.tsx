@@ -11,12 +11,25 @@ import { Statistics } from "@screens/Statistics";
 
 export type RootStackParamList = {
   home: undefined;
-  meal: undefined;
+  meal: { diet: DietProps };
   newMeal: undefined;
   createNewMeal: undefined;
   createNewMealNotInDiet: undefined;
-  statistics: undefined;
+  statistics: {
+    total: number;
+    inDietTrue: number;
+    percentageString: string;
+    maxStreak: number;
+  };
 };
+
+interface DietProps {
+  time: string;
+  name: string;
+  inDiet: boolean;
+  description: string;
+  date: string;
+}
 
 export type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
