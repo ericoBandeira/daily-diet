@@ -30,6 +30,8 @@ interface SendToStatisticsProps {
   maxStreak: number;
 }
 
+type FunctionCreateProps = ({ day, diet }: DietDayProps) => void;
+
 export function Home() {
   const navigation = useNavigation<NavigationProp>();
 
@@ -156,21 +158,22 @@ export function Home() {
     });
   }
 
-  function handleCreateNewMeal() {
-    navigation.navigate("newMeal");
+  function AddMeal({ day, diet }: DietDayProps) {
+    setDietDay((prevDietList) => {
+      const dayExists = prevDietList.find((item) => item.day === day);
+
+      if (dayExists) {
+        return prevDietList.map((item) =>
+          item.day === day ? { ...item, diet: [...item.diet, ...diet] } : item
+        );
+      } else {
+        return [...prevDietList, { day, diet }];
+      }
+    });
   }
 
-  function AddMeal({ day, diet }: DietDayProps) {
-    // setDietDay((prevDietList) => {
-    //   const dayExists = prevDietList.find((item) => item.day === day);
-    //   if (dayExists) {
-    //     return prevDietList.map((item) =>
-    //       item.day === day ? { ...item, diet: [...item.diet, diet] } : item
-    //     );
-    //   } else {
-    //     return [...prevDietList, { day, diet: [diet] }];
-    //   }
-    // });
+  function handleCreateNewMeal() {
+    navigation.navigate("newMeal", { AddMeal });
   }
 
   useEffect(() => {

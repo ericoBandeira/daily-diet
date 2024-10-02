@@ -12,7 +12,7 @@ import { Statistics } from "@screens/Statistics";
 export type RootStackParamList = {
   home: undefined;
   meal: { diet: DietProps };
-  newMeal: undefined;
+  newMeal: { AddMeal: ({ day, diet }: DietDayProps) => void };
   createNewMeal: undefined;
   createNewMealNotInDiet: undefined;
   statistics: {
@@ -22,6 +22,11 @@ export type RootStackParamList = {
     maxStreak: number;
   };
 };
+
+interface DietDayProps {
+  day: string;
+  diet: DietProps[];
+}
 
 interface DietProps {
   time: string;

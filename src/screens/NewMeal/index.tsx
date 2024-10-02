@@ -5,15 +5,46 @@ import { MealHeader } from "@components/MealHeader";
 import { Input } from "@components/Input";
 import { InOrOutInput } from "@components/InOrOutInput";
 import { RegisterButton } from "@components/RegisterButton";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { NavigationProp } from "src/routes/app.routes";
 
+interface DietProps {
+  time: string;
+  name: string;
+  inDiet: boolean;
+  description: string;
+  date: string;
+}
+
+interface DietDayProps {
+  day: string;
+  diet: DietProps[];
+}
+
+type RouteParams = { AddMeal: ({ day, diet }: DietDayProps) => void };
+
 export function NewMeal() {
-  const [inDiet, setInDiet] = useState(true);
   const navigation = useNavigation<NavigationProp>();
+
+  const route = useRoute();
+  const { AddMeal } = route.params as RouteParams;
+
+  const [inDiet, setInDiet] = useState(true);
+  const [time, setTime] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
 
   function handleGoBackHome() {
     navigation.navigate("home");
+  }
+
+  function handleInDietChoice() {
+    setInDiet(true);
+  }
+
+  function handleNotInDietChoice() {
+    setInDiet(false);
   }
 
   function handleCreateMeal() {
@@ -24,6 +55,23 @@ export function NewMeal() {
     }
   }
 
+  function handleSave() {
+    const newMeal = {
+      day: date,
+      diet: [
+        {
+          time: time,
+          name: name,
+          inDiet: inDiet,
+          description: description,
+          date: date,
+        },
+      ],
+    };
+    AddMeal(newMeal);
+    handleCreateMeal();
+  }
+
   return (
     <Container>
       <MealHeader
@@ -32,14 +80,32 @@ export function NewMeal() {
         goBack={handleGoBackHome}
       />
       <NewMealContainer>
-        <Input title="Nome" />
-        <Input title="Descrição" size="lg" />
+        <Input title="Nome" onChangeText={setName} />
+        <Input title="Descrição" size="lg" onChangeText={setDescription} />
         <DoubleContainer>
-          <Input title="Data" half />
-          <Input title="Hora" half />
+          <Input
+            title="Data"
+            half
+            onChangeText={setDate}
+            maxLength={5}
+            keyboardType="numeric"
+            placeholder="01/01/2001"
+          />
+          <Input
+            title="Hora"
+            half
+            onChangeText={setTime}
+            maxLength={5}
+            keyboardType="numeric"
+            placeholder="00:00"
+          />
         </DoubleContainer>
-        <InOrOutInput />
-        <RegisterButton registerMeal={handleCreateMeal} />
+        <InOrOutInput
+          inDietChoice={handleInDietChoice}
+          notInDietChoice={handleNotInDietChoice}
+          inDiet={inDiet}
+        />
+        <RegisterButton registerMeal={handleSave} />
       </NewMealContainer>
     </Container>
   );

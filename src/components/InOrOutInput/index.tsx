@@ -9,26 +9,26 @@ import {
   YesButton,
 } from "./styles";
 
-export function InOrOutInput() {
-  const [inDiet, setInDiet] = useState(true);
+interface InOrOutInputProps {
+  inDietChoice: () => void;
+  notInDietChoice: () => void;
+  inDiet: boolean;
+}
 
-  function handleInDietChoice() {
-    setInDiet(true);
-  }
-
-  function handleNotInDietChoice() {
-    setInDiet(false);
-  }
-
+export function InOrOutInput({
+  inDietChoice,
+  notInDietChoice,
+  inDiet,
+}: InOrOutInputProps) {
   return (
     <Container>
       <Title>Está dentro da dieta?</Title>
       <InOrOutContainer>
-        <YesButton onPress={handleInDietChoice} diet={inDiet}>
+        <YesButton onPress={inDietChoice} diet={inDiet}>
           <ColorBall color="green" />
           <TextButton>Sim</TextButton>
         </YesButton>
-        <NoButton onPress={handleNotInDietChoice} diet={inDiet}>
+        <NoButton onPress={notInDietChoice} diet={inDiet}>
           <ColorBall color="red" />
           <TextButton>Não</TextButton>
         </NoButton>
