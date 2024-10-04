@@ -230,7 +230,7 @@ export function Home() {
     <Container>
       <Header />
       <PercentBox
-        color={(inDietTrue / total) * 100 > 75 ? "green" : "red"}
+        color={(inDietTrue / total) * 100 > 70 ? "green" : "red"}
         goToStatistics={() =>
           handleStatistics({ total, inDietTrue, percentageString, maxStreak })
         }

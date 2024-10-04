@@ -23,7 +23,7 @@ interface DietDayProps {
 
 type RouteParams = { AddMeal: ({ day, diet }: DietDayProps) => void };
 
-export function NewMeal() {
+export function EditMeal() {
   const navigation = useNavigation<NavigationProp>();
 
   const route = useRoute();
@@ -47,13 +47,7 @@ export function NewMeal() {
     setInDiet(false);
   }
 
-  function handleCreateMeal() {
-    if (inDiet) {
-      navigation.navigate("createNewMeal");
-    } else {
-      navigation.navigate("createNewMealNotInDiet");
-    }
-  }
+  function handleCreateMeal() {}
 
   function handleSave() {
     const newMeal = {
