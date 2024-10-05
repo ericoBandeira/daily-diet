@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   ButtonContainer,
@@ -18,7 +18,7 @@ import {
 } from "./styles";
 import { MealHeader } from "@components/MealHeader";
 import { PencilSimpleLine, Trash } from "phosphor-react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { NavigationProp } from "src/routes/app.routes";
 
 interface DietProps {
@@ -36,9 +36,11 @@ type RouteParams = {
 
 export function Meal() {
   const navigation = useNavigation<NavigationProp>();
-  const route = useRoute();
+  const route = useRoute<RouteProp<{ params: RouteParams }, "params">>();
 
-  const { diet, EditMeal } = route.params as RouteParams;
+  const { diet: initialDiet, EditMeal } = route.params as RouteParams;
+
+  const [diet, setDiet] = useState(initialDiet);
 
   function handleGoBackHome() {
     navigation.navigate("home");
@@ -47,6 +49,12 @@ export function Meal() {
   function handleGoToEditPage() {
     navigation.navigate("editPage", { EditMeal, diet });
   }
+
+  useEffect(() => {
+    if (route.params?.diet) {
+      setDiet(route.params.diet);
+    }
+  }, [diet]);
 
   return (
     <Container>

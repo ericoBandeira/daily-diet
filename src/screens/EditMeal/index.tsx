@@ -54,7 +54,7 @@ export function EditMeal() {
       date: date,
     };
     EditMeal(date, editMeal);
-    handleGoBack();
+    navigation.navigate("home");
   }
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export function EditMeal() {
     setName(diet.name);
     setDescription(diet.description);
     setInDiet(diet.inDiet);
-  });
+  }, []);
   return (
     <Container>
       <MealHeader color="gray" title="Editar Refeição" goBack={handleGoBack} />

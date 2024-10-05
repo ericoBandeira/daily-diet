@@ -217,9 +217,6 @@ export function Home() {
         total > 0 ? ((inDietTrue / total) * 100).toFixed(2) : "0%";
       const percentageStringAux = `${percentageAux}%`;
 
-      console.log("Calculated percentage:", percentageAux);
-      console.log("Formatted percentage string:", percentageStringAux);
-
       dietDay.forEach((day) => {
         day.diet.forEach((meal) => {
           if (meal.inDiet) {
