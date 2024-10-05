@@ -172,6 +172,22 @@ export function Home() {
     });
   }
 
+  function EditMeal(day: string, updatedDiet: DietProps) {
+    setDietDay((prevDietList) => {
+      return prevDietList.map((item) => {
+        if (item.day === day) {
+          return {
+            ...item,
+            diet: item.diet.map((meal) =>
+              meal.time === updatedDiet.time ? updatedDiet : meal
+            ),
+          };
+        }
+        return item;
+      });
+    });
+  }
+
   function handleCreateNewMeal() {
     navigation.navigate("newMeal", { AddMeal });
   }
@@ -241,7 +257,9 @@ export function Home() {
         style={{ marginTop: 10 }}
         data={dietDay}
         keyExtractor={(item) => item.day}
-        renderItem={({ item }) => <DietDay day={item.day} diet={item.diet} />}
+        renderItem={({ item }) => (
+          <DietDay day={item.day} diet={item.diet} EditMeal={EditMeal} />
+        )}
         contentContainerStyle={dietDay.length === 0 && { flex: 1 }}
         ListEmptyComponent={() => (
           <EmptyList message="Que tal cadastrar a primeira refeição?" />

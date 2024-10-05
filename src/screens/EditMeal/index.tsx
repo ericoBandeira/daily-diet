@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Container, DoubleContainer, NewMealContainer } from "./styles";
 import { MealHeader } from "@components/MealHeader";
@@ -16,18 +16,16 @@ interface DietProps {
   date: string;
 }
 
-interface DietDayProps {
-  day: string;
-  diet: DietProps[];
-}
-
-type RouteParams = { AddMeal: ({ day, diet }: DietDayProps) => void };
+type RouteParams = {
+  diet: DietProps;
+  EditMeal: (day: string, updatedDiet: DietProps) => void;
+};
 
 export function EditMeal() {
   const navigation = useNavigation<NavigationProp>();
 
   const route = useRoute();
-  const { AddMeal } = route.params as RouteParams;
+  const { diet, EditMeal } = route.params as RouteParams;
 
   const [inDiet, setInDiet] = useState(true);
   const [time, setTime] = useState("");
@@ -35,8 +33,8 @@ export function EditMeal() {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
 
-  function handleGoBackHome() {
-    navigation.navigate("home");
+  function handleGoBack() {
+    navigation.goBack();
   }
 
   function handleInDietChoice() {
@@ -47,40 +45,42 @@ export function EditMeal() {
     setInDiet(false);
   }
 
-  function handleCreateMeal() {}
-
-  function handleSave() {
-    const newMeal = {
-      day: date,
-      diet: [
-        {
-          time: time,
-          name: name,
-          inDiet: inDiet,
-          description: description,
-          date: date,
-        },
-      ],
+  function handleEdit() {
+    const editMeal = {
+      time: time,
+      name: name,
+      inDiet: inDiet,
+      description: description,
+      date: date,
     };
-    AddMeal(newMeal);
-    handleCreateMeal();
+    EditMeal(date, editMeal);
+    handleGoBack();
   }
 
+  useEffect(() => {
+    setDate(diet.date);
+    setTime(diet.time);
+    setName(diet.name);
+    setDescription(diet.description);
+    setInDiet(diet.inDiet);
+  });
   return (
     <Container>
-      <MealHeader
-        color="gray"
-        title="Nova Refeição"
-        goBack={handleGoBackHome}
-      />
+      <MealHeader color="gray" title="Editar Refeição" goBack={handleGoBack} />
       <NewMealContainer>
-        <Input title="Nome" onChangeText={setName} />
-        <Input title="Descrição" size="lg" onChangeText={setDescription} />
+        <Input title="Nome" onChangeText={setName} value={name} />
+        <Input
+          title="Descrição"
+          size="lg"
+          onChangeText={setDescription}
+          value={description}
+        />
         <DoubleContainer>
           <Input
             title="Data"
             half
             onChangeText={setDate}
+            value={date}
             keyboardType="numeric"
             placeholder="01/01/2001"
           />
@@ -88,6 +88,7 @@ export function EditMeal() {
             title="Hora"
             half
             onChangeText={setTime}
+            value={time}
             maxLength={5}
             keyboardType="numeric"
             placeholder="00:00"
@@ -98,7 +99,10 @@ export function EditMeal() {
           notInDietChoice={handleNotInDietChoice}
           inDiet={inDiet}
         />
-        <RegisterButton registerMeal={handleSave} />
+        <RegisterButton
+          registerMeal={handleEdit}
+          buttonLabel="Salvar alterações"
+        />
       </NewMealContainer>
     </Container>
   );

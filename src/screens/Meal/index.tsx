@@ -31,16 +31,21 @@ interface DietProps {
 
 type RouteParams = {
   diet: DietProps;
+  EditMeal: (day: string, updatedDiet: DietProps) => void;
 };
 
 export function Meal() {
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute();
 
-  const { diet } = route.params as RouteParams;
+  const { diet, EditMeal } = route.params as RouteParams;
 
   function handleGoBackHome() {
     navigation.navigate("home");
+  }
+
+  function handleGoToEditPage() {
+    navigation.navigate("editPage", { EditMeal, diet });
   }
 
   return (
@@ -65,7 +70,7 @@ export function Meal() {
         </InDietContainer>
 
         <ButtonContainer>
-          <EditButton>
+          <EditButton onPress={handleGoToEditPage}>
             <PencilSimpleLine size={16} color="#FFFFFF" />
             <EditButtontText>Editar Refeição</EditButtontText>
           </EditButton>

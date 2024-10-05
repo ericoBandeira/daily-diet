@@ -104,7 +104,10 @@ export function NewMeal() {
           notInDietChoice={handleNotInDietChoice}
           inDiet={inDiet}
         />
-        <RegisterButton registerMeal={handleSave} />
+        <RegisterButton
+          registerMeal={handleSave}
+          buttonLabel="Cadastrar refeição"
+        />
       </NewMealContainer>
     </Container>
   );

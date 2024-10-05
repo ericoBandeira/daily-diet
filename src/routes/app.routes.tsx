@@ -4,6 +4,7 @@ import {
 } from "@react-navigation/native-stack";
 import { CreateNewMeal } from "@screens/CreateNewMeal";
 import { CreateNewMealNotInDiet } from "@screens/CreateNewMealNotInDiet";
+import { EditMeal } from "@screens/EditMeal";
 import { Home } from "@screens/Home";
 import { Meal } from "@screens/Meal";
 import { NewMeal } from "@screens/NewMeal";
@@ -11,7 +12,10 @@ import { Statistics } from "@screens/Statistics";
 
 export type RootStackParamList = {
   home: undefined;
-  meal: { diet: DietProps };
+  meal: {
+    diet: DietProps;
+    EditMeal: (day: string, updatedDiet: DietProps) => void;
+  };
   newMeal: { AddMeal: ({ day, diet }: DietDayProps) => void };
   createNewMeal: undefined;
   createNewMealNotInDiet: undefined;
@@ -20,6 +24,10 @@ export type RootStackParamList = {
     inDietTrue: number;
     percentageString: string;
     maxStreak: number;
+  };
+  editPage: {
+    diet: DietProps;
+    EditMeal: (day: string, updatedDiet: DietProps) => void;
   };
 };
 
@@ -52,6 +60,7 @@ export function AppRoutes() {
         component={CreateNewMealNotInDiet}
       />
       <Screen name="statistics" component={Statistics} />
+      <Screen name="editPage" component={EditMeal} />
     </Navigator>
   );
 }
