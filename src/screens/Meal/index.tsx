@@ -20,6 +20,7 @@ import { MealHeader } from "@components/MealHeader";
 import { PencilSimpleLine, Trash } from "phosphor-react-native";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { NavigationProp } from "src/routes/app.routes";
+import { Alert } from "react-native";
 
 interface DietProps {
   time: string;
@@ -32,13 +33,18 @@ interface DietProps {
 type RouteParams = {
   diet: DietProps;
   EditMeal: (day: string, updatedDiet: DietProps) => void;
+  RemoveMeal: (day: string, mealDelete: DietProps) => void;
 };
 
 export function Meal() {
   const navigation = useNavigation<NavigationProp>();
   const route = useRoute<RouteProp<{ params: RouteParams }, "params">>();
 
-  const { diet: initialDiet, EditMeal } = route.params as RouteParams;
+  const {
+    diet: initialDiet,
+    EditMeal,
+    RemoveMeal,
+  } = route.params as RouteParams;
 
   const [diet, setDiet] = useState(initialDiet);
 
@@ -48,6 +54,19 @@ export function Meal() {
 
   function handleGoToEditPage() {
     navigation.navigate("editPage", { EditMeal, diet });
+  }
+
+  function handleDeleteMeal() {
+    Alert.alert("Remover", "Deseja realmente excluir o registro da refeição?", [
+      { text: "Não", style: "cancel" },
+      {
+        text: "Sim",
+        onPress: () => {
+          RemoveMeal(diet.date, diet);
+          navigation.navigate("home");
+        },
+      },
+    ]);
   }
 
   useEffect(() => {
@@ -82,7 +101,7 @@ export function Meal() {
             <PencilSimpleLine size={16} color="#FFFFFF" />
             <EditButtontText>Editar Refeição</EditButtontText>
           </EditButton>
-          <DeleteButton>
+          <DeleteButton onPress={handleDeleteMeal}>
             <Trash size={16} />
             <DeleteButtontText>Excluir refeição</DeleteButtontText>
           </DeleteButton>

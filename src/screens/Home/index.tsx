@@ -188,6 +188,20 @@ export function Home() {
     });
   }
 
+  function RemoveMeal(day: string, mealDelete: DietProps) {
+    setDietDay((prevDietDays) =>
+      prevDietDays.map((dietDay) => {
+        if (dietDay.day === day) {
+          return {
+            ...dietDay,
+            diet: dietDay.diet.filter((meal) => meal.time !== mealDelete.time),
+          };
+        }
+        return dietDay;
+      })
+    );
+  }
+
   function handleCreateNewMeal() {
     navigation.navigate("newMeal", { AddMeal });
   }
@@ -239,6 +253,16 @@ export function Home() {
     }
   }, [dietDay]);
 
+  useEffect(() => {
+    const filteredDietDays = dietDay.filter(
+      (dietDay) => dietDay.diet.length > 0
+    );
+
+    if (filteredDietDays.length !== dietDay.length) {
+      setDietDay(filteredDietDays);
+    }
+  }, [dietDay]);
+
   return (
     <Container>
       <Header />
@@ -255,7 +279,12 @@ export function Home() {
         data={dietDay}
         keyExtractor={(item) => item.day}
         renderItem={({ item }) => (
-          <DietDay day={item.day} diet={item.diet} EditMeal={EditMeal} />
+          <DietDay
+            day={item.day}
+            diet={item.diet}
+            EditMeal={EditMeal}
+            RemoveMeal={RemoveMeal}
+          />
         )}
         contentContainerStyle={dietDay.length === 0 && { flex: 1 }}
         ListEmptyComponent={() => (

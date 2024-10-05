@@ -15,6 +15,7 @@ export type RootStackParamList = {
   meal: {
     diet: DietProps;
     EditMeal: (day: string, updatedDiet: DietProps) => void;
+    RemoveMeal: (day: string, mealDelete: DietProps) => void;
   };
   newMeal: { AddMeal: ({ day, diet }: DietDayProps) => void };
   createNewMeal: undefined;

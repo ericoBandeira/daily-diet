@@ -23,13 +23,14 @@ interface DietDayProps {
   day: string;
   diet: DietProps[];
   EditMeal: (day: string, updatedDiet: DietProps) => void;
+  RemoveMeal: (day: string, mealDelete: DietProps) => void;
 }
 
-export function DietDay({ day, diet, EditMeal }: DietDayProps) {
+export function DietDay({ day, diet, EditMeal, RemoveMeal }: DietDayProps) {
   const navigation = useNavigation<NavigationProp>();
 
   function handleGoToMeal(diet: DietProps) {
-    navigation.navigate("meal", { diet, EditMeal });
+    navigation.navigate("meal", { diet, EditMeal, RemoveMeal });
   }
 
   return (
